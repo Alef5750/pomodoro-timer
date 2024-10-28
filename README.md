@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+## Client Project Request: Simple Pomodoro Timer
+Client: FocusFlow Apps
+Project Timeline: 2-3 days
+Budget: $500
+Project Overview
+We need a clean, minimalist Pomodoro timer that helps users maintain focus. Just the essentials - work timer, break timer, and a basic stats counter.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Key Features
 
-Currently, two official plugins are available:
+Timer Interface
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+25-minute work timer
+5-minute break timer
+Start/pause/reset buttons
+Daily sessions counter
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Mini Stats
 
-- Configure the top-level `parserOptions` property like this:
+Total focus minutes today
+Sessions completed
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# Technical Requirements
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+React with hooks (useState for timer, useEffect for timer logic)
+Local storage for daily stats
+Desktop notification when timer ends
+Minimal, distraction-free design
