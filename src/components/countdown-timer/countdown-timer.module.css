@@ -1,13 +1,3 @@
-.timerSection {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.timerHeading {
-  color: #2d3748;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.timerDisplay {
+  font-size: 5rem;
 }
