@@ -9,10 +9,13 @@ function App() {
   const [currentTask, setCurrentTask] = useState<ITask>(tasks[0]);
 
   const selectTask = (task: ITask) => setCurrentTask(task);
+  const targetTime = Date.now() + 10 * 1000;
+  // const targetTime = Date.now() + 25 * 60 * 1000;
+  console.log(targetTime);
 
   return (
     <div className={styles.container}>
-      <CountdownTimer taskTitle={currentTask.title} targetTime={25} />
+      <CountdownTimer taskTitle={currentTask.title} targetTime={targetTime} />
       <TaskList selectTask={selectTask} />
     </div>
   );
