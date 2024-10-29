@@ -8,18 +8,32 @@ interface propTypes {
 }
 
 const CountdownTimer = ({ targetTime, status }: propTypes) => {
-  const [timeLeft, setTimeLeft] = useState<number>(targetTime - Date.now());
+  const [timeLeft, setTimeLeft] = useState<number>(targetTime * 60);
 
   const intervalRef = useRef<number | null>(null);
-  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
-  const seconds = Math.floor((timeLeft / 1000) % 60);
-  const formattedSeconds = seconds.toString().padStart(2, "0");
-  const formattedMinutes = minutes.toString().padStart(2, "0");
+
+  const minutes = Math.floor(timeLeft / 60)
+    .toString()
+    .padStart(2, "0");
+  const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
   let buttonText = "";
   if (status === "standby") buttonText = "Start";
   else if (status === "counting") buttonText = "Pause";
   else if (status === "paused") buttonText = "Resume";
+
+  const handleClick = () => {
+    if (buttonText === "Start") {
+      const updateTimer = () => {
+        setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - 1, 0)); // Ensure it doesn't go negative
+        if (timeLeft <= 0 && intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
+
+      intervalRef.current = setInterval(updateTimer, 1000);
+    }
+  };
   //   useEffect(() => {
   //     const updateTimer = () => {
   //       const newTimeLeft = targetTime - Date.now();
@@ -37,9 +51,9 @@ const CountdownTimer = ({ targetTime, status }: propTypes) => {
 
   return (
     <div>
-      <button>{buttonText}</button>
+      <button onClick={handleClick}>{buttonText}</button>
       <div className={styles.timerDisplay}>
-        {formattedMinutes}:{formattedSeconds}
+        {minutes}:{seconds}
       </div>
     </div>
   );

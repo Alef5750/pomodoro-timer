@@ -6,13 +6,9 @@ import CountdownTimer, {
   TimerStatus,
 } from "./components/countdown-timer/CountdownTimer";
 
-//TODO: change to 25 minute timer
-// const initialTargetTime = Date.now() + 25 * 60 * 1000;
-const initialTargetTime = Date.now() + 12 * 1000;
-
 function App() {
   const [currentTask, setCurrentTask] = useState<ITask | undefined>(undefined);
-  const [targetTime, setTargetTime] = useState<number>(initialTargetTime);
+  const [targetTime, setTargetTime] = useState<number>(0.1);
   const [timerStatus, setTimerStatus] = useState<TimerStatus>("standby");
   const selectTask = (task: ITask) => setCurrentTask(task);
 
