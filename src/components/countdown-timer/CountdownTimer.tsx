@@ -23,33 +23,27 @@ const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
   else if (status === "counting") buttonText = "Pause";
   else if (status === "paused") buttonText = "Resume";
 
-  const handleClick = () => {
-    if (buttonText === "Start") {
-      const updateTimer = () => {
-        setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - 1, 0)); // Ensure it doesn't go negative
-        updateStatus("counting");
-        if (timeLeft <= 0 && intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-      };
-
-      intervalRef.current = setInterval(updateTimer, 1000);
+  const callback = () => {
+    setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - 1, 0)); // Ensure it doesn't go negative
+    updateStatus("counting");
+    if (timeLeft <= 0 && intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
   };
-  //   useEffect(() => {
-  //     const updateTimer = () => {
-  //       const newTimeLeft = targetTime - Date.now();
-  //       setTimeLeft(newTimeLeft > 0 ? newTimeLeft : 0);
-  //       if (newTimeLeft <= 0 && intervalRef.current) {
-  //         clearInterval(intervalRef.current);
-  //         console.log("It's over!!", targetTime / 60);
-  //       }
-  //     };
-  //     intervalRef.current = setInterval(updateTimer, 1000);
-  //     return () => {
-  //       if (intervalRef.current) clearInterval(intervalRef.current);
-  //     };
-  //   }, [targetTime]);
+  const startTimer = () => {
+    intervalRef.current = setInterval(callback, 1000);
+  };
+
+  const handleClick = () => {
+    if (buttonText === "Start") {
+      startTimer();
+    } else if (buttonText === "Pause" && intervalRef.current) {
+      clearInterval(intervalRef.current);
+      updateStatus("paused");
+    } else if (buttonText === "Resume" && intervalRef.current) {
+      startTimer();
+    }
+  };
 
   return (
     <div>
