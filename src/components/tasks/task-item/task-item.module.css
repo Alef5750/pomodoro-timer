@@ -1,0 +1,39 @@
+.taskItem {
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.taskTitle {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.taskBody {
+  color: #4a5568;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  color: #4a5568;
+  font-size: 0.875rem;
+  user-select: none;
+  cursor: pointer;
+}

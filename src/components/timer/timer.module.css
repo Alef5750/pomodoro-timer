@@ -1,0 +1,21 @@
+.timerSection {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timerHeading {
+  color: #2d3748;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.taskTitle {
+  color: #4a5568;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
