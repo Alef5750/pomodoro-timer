@@ -4,7 +4,7 @@ export const tasks: ITask[] = [
   {
     id: 1,
     title: "Brainstorm Wire-frame",
-    body: "research different tools to best create a wire-frame for my new fullstack app.",
+    body: "Research different tools to best create a wire-frame for my new fullstack app.",
     isComplete: false,
   },
   {

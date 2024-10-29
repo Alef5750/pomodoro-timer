@@ -1,5 +1,5 @@
-import { tasks } from "../../../data";
-import { ITask } from "../../../types/types";
+import { tasks } from "../../data";
+import { ITask } from "../../types/types";
 import TaskItem from "../task-item/TaskItem";
 import styles from "./task-list.module.css";
 

@@ -1,4 +1,4 @@
-import { ITask } from "../../../types/types";
+import { ITask } from "../../types/types";
 import styles from "./task-item.module.css";
 
 const TaskItem = ({ task }: { task: ITask }) => {
