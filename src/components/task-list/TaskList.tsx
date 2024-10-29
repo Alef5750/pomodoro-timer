@@ -7,8 +7,8 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
   return (
     <div className={styles.taskListContainer}>
       <h1 className={styles.taskListHeading}>Tasks</h1>
-      {tasks.map((t) => (
-        <div className={styles.taskWrapper}>
+      {tasks.map((t, idx) => (
+        <div key={idx} className={styles.taskWrapper}>
           <button className={styles.focusButton} onClick={() => selectTask(t)}>
             Focus on me!
           </button>

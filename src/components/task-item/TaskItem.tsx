@@ -12,6 +12,7 @@ const TaskItem = ({ task }: { task: ITask }) => {
           checked={task.isComplete}
           id="completed"
           className={styles.checkbox}
+          onChange={() => console.log("checked")}
         />
         <label htmlFor="completed" className={styles.checkboxLabel}>
           Completed
