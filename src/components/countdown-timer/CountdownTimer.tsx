@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./countdown-timer.module.css";
 
 export type TimerStatus = "standby" | "counting" | "paused" | "finished";
 interface propTypes {
   targetTime: number;
   status: TimerStatus;
+  updateStatus: (newStatus: TimerStatus) => void;
 }
 
-const CountdownTimer = ({ targetTime, status }: propTypes) => {
+const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
   const [timeLeft, setTimeLeft] = useState<number>(targetTime * 60);
 
   const intervalRef = useRef<number | null>(null);
@@ -26,6 +27,7 @@ const CountdownTimer = ({ targetTime, status }: propTypes) => {
     if (buttonText === "Start") {
       const updateTimer = () => {
         setTimeLeft((prevTimeLeft) => Math.max(prevTimeLeft - 1, 0)); // Ensure it doesn't go negative
+        updateStatus("counting");
         if (timeLeft <= 0 && intervalRef.current) {
           clearInterval(intervalRef.current);
         }

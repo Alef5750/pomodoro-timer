@@ -9,8 +9,12 @@ import CountdownTimer, {
 function App() {
   const [currentTask, setCurrentTask] = useState<ITask | undefined>(undefined);
   const [targetTime, setTargetTime] = useState<number>(0.1);
-  const [timerStatus, setTimerStatus] = useState<TimerStatus>("standby");
+  const [status, setStatus] = useState<TimerStatus>("standby");
   const selectTask = (task: ITask) => setCurrentTask(task);
+
+  const updateStatus = (newStatus: TimerStatus) => {
+    setStatus(newStatus);
+  };
 
   const titleText = currentTask
     ? `Focusing on ${currentTask.title.toUpperCase()}`
@@ -20,7 +24,11 @@ function App() {
       <section className={styles.timerSection}>
         <h1>{titleText}</h1>
         {currentTask ? (
-          <CountdownTimer targetTime={targetTime} status={timerStatus} />
+          <CountdownTimer
+            targetTime={targetTime}
+            status={status}
+            updateStatus={updateStatus}
+          />
         ) : (
           ""
         )}
