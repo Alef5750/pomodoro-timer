@@ -24,13 +24,19 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
     await axios.delete(`${baseUrl}/todos/${id}`);
     fetchTasks();
   };
+  const handleCheck = async (isComplete: boolean, id: number | undefined) => {
+    const response = await axios.put(`${baseUrl}/todos/${id}`, { isComplete });
+    const success = response.status === 200;
+    if (success) fetchTasks();
+  };
   const handleSubmit = async () => {
     if (inputTaskRef.current) {
       const newTitle = inputTaskRef.current.value;
       const newTask = { ...initialNewTask, title: newTitle };
       console.log(newTask);
-      await axios.post(`${baseUrl}/todos`, newTask);
-      fetchTasks();
+      const response = await axios.post(`${baseUrl}/todos`, newTask);
+      const success = response.status === 200;
+      if (success) fetchTasks();
     }
   };
   return (
@@ -43,7 +49,11 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
           <button className={styles.focusButton} onClick={() => selectTask(t)}>
             Focus on me!
           </button>
-          <TaskItem task={t} handleDelete={handleDelete} />
+          <TaskItem
+            task={t}
+            handleDelete={handleDelete}
+            handleCheck={handleCheck}
+          />
         </div>
       ))}
     </div>

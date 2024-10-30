@@ -1,16 +1,12 @@
 import { ITask } from "../../types/types";
 import styles from "./task-item.module.css";
 
-const TaskItem = ({
-  task,
-  handleDelete,
-}: {
+interface ITaskItemProps {
   task: ITask;
   handleDelete: (id: number) => void;
-}) => {
-  const updateTask = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
-  };
+  handleCheck: (isComplete: boolean, id: number | undefined) => void;
+}
+const TaskItem = ({ task, handleDelete, handleCheck }: ITaskItemProps) => {
   return (
     <div className={styles.taskItem}>
       <h2 className={styles.taskTitle}>{task.title.toUpperCase()}</h2>
@@ -26,7 +22,7 @@ const TaskItem = ({
           checked={task.isComplete}
           id="completed"
           className={styles.checkbox}
-          onChange={updateTask}
+          onChange={(e) => handleCheck(e.target.checked, task.id)}
         />
         <label htmlFor="completed" className={styles.checkboxLabel}>
           Completed
