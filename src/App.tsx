@@ -13,7 +13,11 @@ function App() {
   const selectTask = (task: ITask) => setCurrentTask(task);
 
   const updateStatus = (newStatus: TimerStatus) => {
+    console.log("update to", newStatus);
     setStatus(newStatus);
+  };
+  const updateTargetTime = (newTargetTime: number) => {
+    setTargetTime(newTargetTime);
   };
 
   const titleText = currentTask
@@ -28,6 +32,7 @@ function App() {
             targetTime={targetTime}
             status={status}
             updateStatus={updateStatus}
+            updateTargetTime={updateTargetTime}
           />
         ) : (
           ""
