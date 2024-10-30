@@ -1,24 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ITask } from "../../types/types";
 import TaskItem from "../task-item/TaskItem";
 import styles from "./task-list.module.css";
 import axios from "axios";
 
 const baseUrl = "https://66e9905787e417609449f8bc.mockapi.io/api/v1";
-
+const initialNewTask: ITask = {
+  title: "",
+  isComplete: false,
+};
 const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const inputTaskRef = useRef<HTMLInputElement>(null);
+  const fetchTasks = async () => {
+    const response = await axios.get(`${baseUrl}/todos`);
+    setTasks(response.data);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(`${baseUrl}/todos`);
-      setTasks(response.data);
-    };
-    fetchData();
+    fetchTasks();
   }, []);
 
+  const handleSubmit = async () => {
+    if (inputTaskRef.current) {
+      const newTitle = inputTaskRef.current.value;
+      const newTask = { ...initialNewTask, title: newTitle };
+      console.log(newTask);
+      await axios.post(`${baseUrl}/todos`, newTask);
+      fetchTasks();
+    }
+  };
   return (
     <div className={styles.taskListContainer}>
       <h1 className={styles.taskListHeading}>Tasks</h1>
+      <input ref={inputTaskRef} type="text" placeholder="E.g: Go Shopping" />
+      <button onClick={handleSubmit}>+</button>
       {tasks.map((t, idx) => (
         <div key={idx} className={styles.taskWrapper}>
           <button className={styles.focusButton} onClick={() => selectTask(t)}>
