@@ -9,7 +9,12 @@ interface ITaskItemProps {
 const TaskItem = ({ task, handleDelete, handleCheck }: ITaskItemProps) => {
   return (
     <div className={styles.taskItem}>
-      <h2 className={styles.taskTitle}>{task.title.toUpperCase()}</h2>
+      <h2
+        style={task.isComplete ? { textDecoration: "line-through" } : {}}
+        className={styles.taskTitle}
+      >
+        {task.title.toUpperCase()}
+      </h2>
       <button
         onClick={() => (task.id ? handleDelete(task.id) : "")}
         className={styles.deleteButton}

@@ -44,3 +44,7 @@
   color: white;
   font-size: 2rem;
 }
+
+.isComplete {
+  text-decoration: line-through;
+}
