@@ -20,6 +20,10 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
     fetchTasks();
   }, []);
 
+  const handleDelete = async (id: number) => {
+    await axios.delete(`${baseUrl}/todos/${id}`);
+    fetchTasks();
+  };
   const handleSubmit = async () => {
     if (inputTaskRef.current) {
       const newTitle = inputTaskRef.current.value;
@@ -39,7 +43,7 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
           <button className={styles.focusButton} onClick={() => selectTask(t)}>
             Focus on me!
           </button>
-          <TaskItem task={t} />
+          <TaskItem task={t} handleDelete={handleDelete} />
         </div>
       ))}
     </div>
