@@ -16,7 +16,6 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
     fetchData();
   }, []);
 
-  console.log(tasks);
   return (
     <div className={styles.taskListContainer}>
       <h1 className={styles.taskListHeading}>Tasks</h1>
