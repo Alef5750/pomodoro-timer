@@ -33,9 +33,7 @@ const TaskList = ({ selectTask }: { selectTask: (task: ITask) => void }) => {
     if (inputTaskRef.current) {
       const newTitle = inputTaskRef.current.value;
       const newTask = { ...initialNewTask, title: newTitle };
-      console.log(newTask);
       const response = await axios.post(`${baseUrl}/todos`, newTask);
-      console.log(response);
       const success = response.data;
       if (success) fetchTasks();
     }
