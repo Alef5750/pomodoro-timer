@@ -56,12 +56,17 @@ const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
   }, [timeLeft, updateStatus, status]);
 
   return (
-    <div>
-      <button onClick={handleClick}>{buttonText}</button>
+    <div className={styles.container}>
       <div className={styles.timerDisplay}>
-        {minutes}:{seconds}
+        <span className={styles.timeLeft}>
+          {minutes}:{seconds}
+        </span>
+        <div>Status: {status}</div>
       </div>
-      <p>Status: {status}</p>
+
+      <button className={styles.button} onClick={handleClick}>
+        {buttonText}
+      </button>
     </div>
   );
 };
