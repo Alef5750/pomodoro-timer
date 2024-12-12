@@ -8,7 +8,7 @@ import CountdownTimer, {
 
 function App() {
   const [currentTask, setCurrentTask] = useState<ITask | undefined>(undefined);
-  const [targetTime, setTargetTime] = useState<number>(0.1);
+  const [targetTime, setTargetTime] = useState<number>(25);
   const [status, setStatus] = useState<TimerStatus>("standby");
   const selectTask = (task: ITask) => setCurrentTask(task);
 

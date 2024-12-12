@@ -11,7 +11,6 @@ interface propTypes {
 
 const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
   const [timeLeft, setTimeLeft] = useState<number>(targetTime * 60);
-
   const intervalRef = useRef<number | null>(null);
 
   const minutes = Math.floor(timeLeft / 60)
