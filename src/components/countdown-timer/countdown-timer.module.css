@@ -25,7 +25,13 @@
   background-color: black;
   color: #F8D095;
   border-radius: 30px;
-  font-size: 2rem;
+  /* font-size: 2rem; */
   padding: 20px;
   margin-top: 20px;
+
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
 }

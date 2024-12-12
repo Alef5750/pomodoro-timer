@@ -1,5 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./countdown-timer.module.css";
+import { FaPlay, FaPause } from "react-icons/fa";
+import { GrResume } from "react-icons/gr";
+
+import Button from "./Button";
 
 export type TimerStatus = "standby" | "counting" | "paused" | "finished";
 interface propTypes {
@@ -18,11 +22,14 @@ const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
     .padStart(2, "0");
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
-  let buttonText = "";
-  if (status === "standby") buttonText = "Start";
-  else if (status === "counting") buttonText = "Pause";
-  else if (status === "paused") buttonText = "Resume";
-  else if (status === "finished") buttonText = "Next";
+  let buttonContent:
+    | string
+    | React.ComponentType<React.SVGProps<SVGSVGElement>> = "";
+
+  if (status === "standby") buttonContent = FaPlay;
+  else if (status === "counting") buttonContent = FaPause;
+  else if (status === "paused") buttonContent = GrResume;
+  else if (status === "finished") buttonContent = "Next";
 
   const startTimer = () => {
     updateStatus("counting");
@@ -37,12 +44,12 @@ const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
   };
 
   const handleClick = () => {
-    if (buttonText === "Start") {
+    if (buttonContent === FaPlay) {
       startTimer();
-    } else if (buttonText === "Pause" && intervalRef.current) {
+    } else if (buttonContent === FaPause && intervalRef.current) {
       clearInterval(intervalRef.current);
       updateStatus("paused");
-    } else if (buttonText === "Resume" && intervalRef.current) {
+    } else if (buttonContent === GrResume && intervalRef.current) {
       startTimer();
     }
   };
@@ -60,12 +67,13 @@ const CountdownTimer = ({ targetTime, status, updateStatus }: propTypes) => {
         <span className={styles.timeLeft}>
           {minutes}:{seconds}
         </span>
-        <div>Status: {status}</div>
       </div>
 
-      <button className={styles.button} onClick={handleClick}>
-        {buttonText}
-      </button>
+      <Button
+        Icon={typeof buttonContent !== "string" ? buttonContent : null}
+        text={typeof buttonContent === "string" ? buttonContent : ""}
+        handleClick={handleClick}
+      />
     </div>
   );
 };
